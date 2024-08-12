@@ -3,11 +3,7 @@ import React from "react";
 function MainContent() {
   return (
     <main>
-      <p>
-        I love to visit <span style={{ color: "red" }}>New York</span>,{" "}
-        <span style={{ color: "pink" }}>Paris</span>, and{" "}
-        <span style={{ color: "darkblue" }}>Tokyo</span>.
-      </p>
+      <p style={{backgroundColor:'black'}}>I love to visit New York, Paris, and Tokyo.</p>
     </main>
   );
 }
