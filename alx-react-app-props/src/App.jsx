@@ -7,7 +7,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import ProfilePage from "./components/ProfilePage";
-import UserContext from "./UserContext";
+import UserContext from "./components/UserContext";
 import "./App.css";
 
 function App() {
