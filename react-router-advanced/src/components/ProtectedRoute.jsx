@@ -1,7 +1,9 @@
 import { Navigate } from "react-router-dom";
+import useAuth from "./AuthContext";
 
-function ProtectedRoute({ isAuthenticated, children }) {
-  // Check if the user is authenticated
+function ProtectedRoute({ children }) {
+  const isAuthenticated = useAuth();
+
   return isAuthenticated ? children : <Navigate to="/" />;
 }
 
