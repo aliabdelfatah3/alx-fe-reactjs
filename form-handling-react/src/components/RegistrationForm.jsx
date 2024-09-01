@@ -6,6 +6,13 @@ function RegistrationForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const validate = () => {
+    const newErrors = {};
+    if (!username) newErrors.username = "Username Is Requiered";
+    if (!email) newErrors.email = "Email Is Requiered";
+    if (!password) newErrors.password = "Password Is Requiered";
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username || !email || !password) {
