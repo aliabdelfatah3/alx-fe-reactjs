@@ -5,22 +5,24 @@ function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
   const validate = () => {
     const newErrors = {};
     if (!username) newErrors.username = "Username Is Requiered";
     if (!email) newErrors.email = "Email Is Requiered";
     if (!password) newErrors.password = "Password Is Requiered";
+    return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!username || !email || !password) {
-      alert("All fields are required!");
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
     console.log("Form submitted:", { username, email, password });
-    // Here you can send the data to the mock API
   };
 
   return (
@@ -34,6 +36,9 @@ function RegistrationForm() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        {errors.username && (
+          <div style={{ color: "red" }}>{errors.username}</div>
+        )}
       </div>
       <div>
         <label htmlFor="email">Email:</label>
