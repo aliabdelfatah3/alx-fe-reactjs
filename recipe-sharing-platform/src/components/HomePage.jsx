@@ -12,13 +12,13 @@ function HomePage() {
 
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <h1 className="w-fit text-2xl font-bold border-b-2 py-2 border-black">
           Recipes Lists
         </h1>
       </div>
-      <div className="flex justify-center gap-28 mt-20">
-        <div className="hover:scale-110 hover:shadow-2xl">
+      <div className="grid gap-10 lg:pl-96 mt-20 w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ">
+        <div className="flex mx-auto w-fit bg-emerald-800 rounded-md hover:scale-110 hover:shadow-2xl">
           {recipes
             .filter((recipe) => recipe.id === 1)
             .map((recipe) => (
@@ -28,12 +28,14 @@ function HomePage() {
                   alt={recipe.title}
                   className="mb-4 w-full h-40 object-cover rounded"
                 />
-                <h2 className="text-xl mb-3 font-semibold">{recipe.title}</h2>
-                <p className="text-gray-600">{recipe.summary}</p>
+                <h2 className="text-xl mb-3 text-emerald-100 font-semibold">
+                  {recipe.title}
+                </h2>
+                <p className="text-emerald-50">{recipe.summary}</p>
               </div>
             ))}
         </div>
-        <div className="hover:scale-110 hover:shadow-2xl">
+        <div className="flex mx-auto w-fit bg-emerald-800 rounded-md hover:scale-110 hover:shadow-2xl">
           {recipes
             .filter((recipe) => recipe.id === 2)
             .map((recipe) => (
@@ -43,8 +45,10 @@ function HomePage() {
                   alt={recipe.title}
                   className="mb-4 w-full h-40 object-cover rounded"
                 />
-                <h2 className="text-xl mb-3 font-semibold">{recipe.title}</h2>
-                <p className="text-gray-600">{recipe.summary}</p>
+                <h2 className="text-xl mb-3 text-emerald-100 font-semibold">
+                  {recipe.title}
+                </h2>
+                <p className="text-emerald-50">{recipe.summary}</p>
               </div>
             ))}
         </div>

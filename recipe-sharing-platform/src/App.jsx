@@ -8,7 +8,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="bg-slate-00 w-screen h-screen">
+    <div className="bg-emerald-100 w-screen h-screen">
       <HomePage />
     </div>
   );
