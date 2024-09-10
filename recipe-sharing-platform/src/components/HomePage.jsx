@@ -18,7 +18,7 @@ function HomePage() {
         </h1>
       </div>
       <div className="flex justify-center gap-28 mt-20">
-        <div>
+        <div className="hover:scale-110 hover:shadow-2xl">
           {recipes
             .filter((recipe) => recipe.id === 1)
             .map((recipe) => (
@@ -33,7 +33,7 @@ function HomePage() {
               </div>
             ))}
         </div>
-        <div>
+        <div className="hover:scale-110 hover:shadow-2xl">
           {recipes
             .filter((recipe) => recipe.id === 2)
             .map((recipe) => (
