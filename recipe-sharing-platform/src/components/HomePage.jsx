@@ -64,6 +64,13 @@ function HomePage() {
             ))}
         </div>
       </div>
+      <div className="text-center mt-10">
+        <NavLink to={"form"}>
+          <button className="bg-blue-400 py-1 px-3 rounded-full">
+            Apply Form
+          </button>
+        </NavLink>
+      </div>
     </div>
   );
 }
