@@ -8,7 +8,6 @@ function App() {
   const handleSearch = async (username) => {
     try {
       const data = await fetchUserData(username);
-      console.log("GitHub Data:", data); // Here you can handle the API response
     } catch (error) {
       console.error("Error fetching GitHub data:", error);
     }
