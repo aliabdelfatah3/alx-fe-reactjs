@@ -21,7 +21,7 @@ const Search = ({ onSearch }) => {
       setUserData(data); // Set user data if successful
     } catch (err) {
       setUserData(null); // Clear user data if error
-      setError("Looks like we can’t find the user"); // Set error message
+      setError("Looks like we cant find the user"); // Set error message
     } finally {
       setLoading(false); // Stop loading after fetching data
     }
