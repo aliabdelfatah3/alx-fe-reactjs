@@ -1,5 +1,6 @@
 // src/components/Search.jsx
 import React, { useState } from "react";
+import axios from "axios";
 
 const Search = ({ onSearch }) => {
   const [username, setUsername] = useState(""); // State for input
@@ -7,6 +8,25 @@ const Search = ({ onSearch }) => {
   const [loading, setLoading] = useState(false); // State for loading
   const [error, setError] = useState(""); // State for error handling
 
+  const githubApiKey = import.meta.env.VITE_GITHUB_API_KEY; // Get the API key from environment variables
+
+  // Function to fetch GitHub user data
+  const fetchUserData = async (username) => {
+    try {
+      const response = await axios.get(
+        `https://api.github.com/users/${username}`,
+        {
+          headers: {
+            Authorization: `token ${githubApiKey}`, // Include your GitHub token here
+          },
+        }
+      );
+      return response.data; // Return the user data
+    } catch (error) {
+      console.error("Error fetching GitHub user data:", error);
+      throw error; // Throw the error to be handled in the component
+    }
+  };
   const handleInputChange = (event) => {
     setUsername(event.target.value); // Update username on input change
   };
