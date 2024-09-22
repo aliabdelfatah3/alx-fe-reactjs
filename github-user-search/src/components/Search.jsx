@@ -18,7 +18,7 @@ function Search({ onSearch }) {
       setError(""); 
     } catch (err) {
       setUserData(null); 
-      setError("Looks like we can’t find the user"); 
+      setError("Looks like we cant find the user"); 
     }
 
     setLoading(false); 
