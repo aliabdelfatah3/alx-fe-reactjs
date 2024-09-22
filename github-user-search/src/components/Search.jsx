@@ -1,27 +1,30 @@
+// src/components/Search.jsx
 import React, { useState } from "react";
 
-function Search({ onSearch }) {
-  const [username, setUsername] = useState("");
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const handleInputChange = (e) => {
-    setUsername(e.target.value);
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    try {
-      const data = await onSearch(username);
-      setUserData(data);
-      setError("");
-    } catch (err) {
-      setUserData(null);
-      setError("Looks like we cant find the user");
-    }
+const Search = ({ onSearch }) => {
+  const [username, setUsername] = useState(""); // State for input
+  const [userData, setUserData] = useState(null); // State for fetched data
+  const [loading, setLoading] = useState(false); // State for loading
+  const [error, setError] = useState(""); // State for error handling
 
-    setLoading(false);
+  const handleInputChange = (event) => {
+    setUsername(event.target.value); // Update username on input change
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission
+    setLoading(true); // Show loading while fetching data
+    setError(""); // Clear previous errors
+
+    try {
+      const data = await onSearch(username); // Fetch user data using the passed function
+      setUserData(data); // Set user data if successful
+    } catch (err) {
+      setUserData(null); // Clear user data if error
+      setError("Looks like we can’t find the user"); // Set error message
+    } finally {
+      setLoading(false); // Stop loading after fetching data
+    }
   };
 
   return (
@@ -41,23 +44,22 @@ function Search({ onSearch }) {
           Search
         </button>
       </form>
-
-      {loading && <p>Loading...</p>}
-
-      {error && <p className="text-red-500">{error}</p>}
-
-      {userData && (
-        <div className="user-info">
+      {loading && <p>Loading...</p>} {/* Show loading message */}
+      {error && <p className="text-red-500">{error}</p>}{" "}
+      {/* Show error message */}
+      {userData && ( // Display user data if available
+        <div className="user-info mt-4">
           <img
-            src={userData.avatar_url}
-            alt={`${userData.login}'s avatar`}
-            className="w-16 h-16 rounded-full"
+            src={userData.avatar_url} // User's avatar URL
+            alt={`${userData.login}'s avatar`} // Alt text for the image
+            className="w-16 h-16 rounded-full" // Style for the image
           />
-          <h2 className="text-xl font-bold">{userData.login}</h2>
+          <h2 className="text-xl font-bold">{userData.login}</h2>{" "}
+          {/* User's login name */}
         </div>
       )}
     </div>
   );
-}
+};
 
 export default Search;
