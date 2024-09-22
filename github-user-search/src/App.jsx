@@ -7,7 +7,7 @@ import "./App.css";
 function App() {
   const handleSearch = async (username) => {
     try {
-      const data = await fetchGitHubData(username);
+      const data = await fetchUserData(username);
       console.log("GitHub Data:", data); // Here you can handle the API response
     } catch (error) {
       console.error("Error fetching GitHub data:", error);
