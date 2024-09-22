@@ -1,22 +1,33 @@
-// src/services/githubService.js
 import axios from "axios";
 
-const githubApiKey = import.meta.env.VITE_GITHUB_API_KEY; // Get the API key from environment variables
+const githubApiKey = import.meta.env.VITE_GITHUB_API_KEY;
 
-// Function to fetch GitHub user data
-export const fetchUserData = async (username) => {
+export const fetchUserData = async (query) => {
+  const buildQuery = (username, location, repoCount) => {
+    let query = username ? `login:${username}` : "";
+
+    if (location) {
+      query += ` location:${location}`;
+    }
+
+    if (repoCount) {
+      query += ` repos:>${repoCount}`;
+    }
+
+    return query.trim(); // Return the constructed query
+  };
   try {
     const response = await axios.get(
-      `https://api.github.com/users/${username}`,
+      `https://api.github.com/search/users?q=${query}`,
       {
         headers: {
-          Authorization: `token ${githubApiKey}`, // Include the API token in headers
+          Authorization: `token ${githubApiKey}`,
         },
       }
     );
-    return response.data; // Return the user data
+    return response.data.items;
   } catch (error) {
     console.error("Error fetching GitHub user data:", error);
-    throw error; // Re-throw the error for handling in the component
+    throw error;
   }
 };
