@@ -29,42 +29,28 @@ const Search = () => {
     const query = buildQuery(username, location, repoCount); // Construct the query
 
     try {
-      const data = await fetchUserData(query); // Call the fetch function with the query
-      setUsers(data); // Set users data if successful
+      const data = await fetchUserData(username); // Fetch user data from GitHub API
+      if (data) {
+        setUserData(data); // Set fetched user data
+      } else {
+        setError("Looks like we cant find the user");
+      }
     } catch (err) {
-      setUsers([]); // Clear users data if error occurs
-      setError("Error fetching users. Please try again."); // Set error message
+      setError("Looks like we cant find the user");
     } finally {
-      setLoading(false); // Stop loading after fetching data
+      setLoading(false);
     }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="mb-4">
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="username"
           value={username}
           onChange={handleInputChange}
-          placeholder="GitHub Username"
+          placeholder="Enter GitHub username"
           className="p-2 border rounded"
-        />
-        <input
-          type="text"
-          name="location"
-          value={location}
-          onChange={handleInputChange}
-          placeholder="Location"
-          className="p-2 border rounded ml-2"
-        />
-        <input
-          type="number"
-          name="repoCount"
-          value={repoCount}
-          onChange={handleInputChange}
-          placeholder="Min Repo Count"
-          className="p-2 border rounded ml-2"
         />
         <button
           type="submit"
@@ -73,30 +59,21 @@ const Search = () => {
           Search
         </button>
       </form>
-      {loading && <p>Loading...</p>} {/* Show loading message */}
-      {error && <p className="text-red-500">{error}</p>}{" "}
+      {loading && <p>Loading...</p>} {/* Show loading while fetching */}
+      {error && <p className="text-red-500 mt-2">{error}</p>}{" "}
       {/* Show error message */}
-      {users.length > 0 && ( // Display users if available
-        <div className="user-list mt-4">
-          <h3 className="text-lg font-semibold">Users:</h3>
-          <ul>
-            {users.map(
-              (
-                user // Use map to display each user
-              ) => (
-                <li key={user.id} className="border p-2 mt-2 rounded">
-                  <a
-                    href={user.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500"
-                  >
-                    {user.login}
-                  </a>
-                </li>
-              )
-            )}
-          </ul>
+      {userData && ( // If user data is available, display it
+        <div className="user-details mt-4">
+          <img
+            src={userData.avatar_url} // Display user's avatar
+            alt={`${userData.login}'s avatar`}
+            className="w-20 h-20 rounded-full"
+          />
+          <p className="mt-2 font-bold">{userData.login}</p>{" "}
+          {/* Display user's login name */}
+          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
+            View Profile
+          </a>
         </div>
       )}
     </div>
