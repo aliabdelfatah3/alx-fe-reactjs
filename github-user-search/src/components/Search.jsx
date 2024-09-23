@@ -59,21 +59,26 @@ const Search = () => {
           Search
         </button>
       </form>
-      {loading && <p>Loading...</p>} {/* Show loading while fetching */}
-      {error && <p className="text-red-500 mt-2">{error}</p>}{" "}
-      {/* Show error message */}
-      {userData && ( // If user data is available, display it
-        <div className="user-details mt-4">
-          <img
-            src={userData.avatar_url} // Display user's avatar
-            alt={`${userData.login}'s avatar`}
-            className="w-20 h-20 rounded-full"
-          />
-          <p className="mt-2 font-bold">{userData.login}</p>{" "}
-          {/* Display user's login name */}
-          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
-            View Profile
-          </a>
+
+      {loading && <p>Loading...</p>}
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+
+      {/* Map through userList array */}
+      {userList.length > 0 && (
+        <div className="user-list mt-4">
+          {userList.map((user) => (
+            <div key={user.id} className="user-details mb-4">
+              <img
+                src={user.avatar_url}
+                alt={`${user.login}'s avatar`}
+                className="w-20 h-20 rounded-full"
+              />
+              <p className="mt-2 font-bold">{user.login}</p>
+              <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+                View Profile
+              </a>
+            </div>
+          ))}
         </div>
       )}
     </div>
